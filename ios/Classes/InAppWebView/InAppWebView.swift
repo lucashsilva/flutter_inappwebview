@@ -224,7 +224,14 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavi
             }
         }
         
-        return super.hitTest(point, with: event)
+        let view = super.hitTest(point, with: event);
+
+        let gestureRecognizers = self.superview?.superview?.gestureRecognizers ?? []
+        for gesture in gestureRecognizers{
+
+            gesture.isEnabled = false
+        }
+        return view
     }
     
     public override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
